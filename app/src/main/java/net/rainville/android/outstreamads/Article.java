@@ -28,7 +28,9 @@ public class Article {
         ArticleItemText article1 = new ArticleItemText(context.getString(R.string.text_item_1));
         mArticleItems.add(article1);
 
-        ArticleItemVideo article2 = new ArticleItemVideo(context.getString(R.string.videoId));
+        ArticleItemVideo article2 = new ArticleItemVideo(context.getString(R.string.videoId),
+                                                        context.getString(R.string.account),
+                                                        context.getString(R.string.policy));
         mArticleItems.add(article2);
 
         ArticleItemText article3 = new ArticleItemText(context.getString(R.string.text_item_2));

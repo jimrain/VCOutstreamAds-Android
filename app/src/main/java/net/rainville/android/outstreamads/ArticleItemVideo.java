@@ -1,5 +1,7 @@
 package net.rainville.android.outstreamads;
 
+import android.os.Bundle;
+
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.EventEmitter;
@@ -19,18 +21,12 @@ public class ArticleItemVideo extends BrightcovePlayer implements ArticleItem {
     private Video   mVideo;
     // private String mVideo;
 
-    public ArticleItemVideo(String VideoID) {
+    public ArticleItemVideo(String VideoID, String AccountID, String PolicyKey) {
         mType = ARTICLE_TYPE.VIDEO;
         mId = UUID.randomUUID();
-        // mVideo = VideoID;
-
-        // Get the event emitter from the SDK and create a catalog request to fetch a video from the
-        // Brightcove Edge service, given a video id, an account id and a policy key.
-        //EventEmitter eventEmitter = brightcoveVideoView.getEventEmitter();
-
 
         EventEmitter eventEmitter = new EventEmitterImpl();
-        Catalog catalog = new Catalog(eventEmitter, getString(R.string.account), getString(R.string.policy));
+        Catalog catalog = new Catalog(eventEmitter, AccountID, PolicyKey);
 
         catalog.findVideoByID(VideoID, new VideoListener() {
 

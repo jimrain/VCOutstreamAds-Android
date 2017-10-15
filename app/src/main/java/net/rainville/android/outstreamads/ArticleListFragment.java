@@ -11,6 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.brightcove.player.event.Event;
+import com.brightcove.player.event.EventEmitter;
+import com.brightcove.player.event.EventListener;
+import com.brightcove.player.event.EventType;
+import com.brightcove.player.model.Video;
+import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
+import com.brightcove.player.view.BrightcoveVideoView;
+
 import java.util.List;
 
 /**
@@ -76,7 +84,7 @@ public class ArticleListFragment extends Fragment {
     }
 
     private class VideoArticleHolder extends AbstractArticleItemHolder {
-        /*
+
         public final Context context;
         public final TextView videoTitleText;
         public final FrameLayout videoFrame;
@@ -99,18 +107,19 @@ public class ArticleListFragment extends Fragment {
                 }
             });
         }
-        */
-        private TextView mTextView;
-        private ArticleItemVideo mVideoItem;
 
+        // private TextView mTextView;
+        // private ArticleItemVideo mVideoItem;
+
+        /*
         public VideoArticleHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater, parent, R.layout.article_item_video);
             mTextView = (TextView)itemView.findViewById(R.id.text_view);
         }
-
+        */
         public void bind(ArticleItemVideo videoItem) {
-            mVideoItem = videoItem;
-            mTextView.setText((String)mVideoItem.getContent());
+            // mVideoItem = videoItem;
+            // mTextView.setText((String)mVideoItem.getContent());
         }
 
     }
@@ -144,7 +153,7 @@ public class ArticleListFragment extends Fragment {
             if (articleItem.getArticleType() == ArticleItem.ARTICLE_TYPE.TEXT) {
                 ((TextArticleHolder) holder).bind((ArticleItemText)articleItem);
             } else if (articleItem.getArticleType() == ArticleItem.ARTICLE_TYPE.VIDEO) {
-                /*
+
                 // ((VideoArticleHolder)holder).bind(articleItem);
                 Video video = (Video) articleItem.getContent();
                 VideoArticleHolder vHolder = (VideoArticleHolder) holder;
@@ -152,8 +161,8 @@ public class ArticleListFragment extends Fragment {
                 BrightcoveVideoView videoView = vHolder.videoView;
                 videoView.clear();
                 videoView.add(video);
-                */
-                ((VideoArticleHolder) holder).bind((ArticleItemVideo)articleItem);
+
+                // ((VideoArticleHolder) holder).bind((ArticleItemVideo)articleItem);
             }
         }
 
