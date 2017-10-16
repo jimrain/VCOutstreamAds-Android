@@ -11,10 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.brightcove.player.controller.MediaControlsVisibilityManager;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
 import com.brightcove.player.event.EventType;
+import com.brightcove.player.mediacontroller.BrightcoveMediaController;
 import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcoveVideoView;
@@ -86,7 +88,7 @@ public class ArticleListFragment extends Fragment {
     private class VideoArticleHolder extends AbstractArticleItemHolder {
 
         public final Context context;
-        public final TextView videoTitleText;
+        // public final TextView videoTitleText;
         public final FrameLayout videoFrame;
         public final BrightcoveVideoView videoView;
 
@@ -94,7 +96,7 @@ public class ArticleListFragment extends Fragment {
             super(inflater, parent, R.layout.article_item_video);
             context = itemView.getContext();
             videoFrame = (FrameLayout) itemView.findViewById(R.id.video_frame);
-            videoTitleText = (TextView) itemView.findViewById(R.id.video_title_text);
+            // videoTitleText = (TextView) itemView.findViewById(R.id.video_title_text);
             videoView = new BrightcoveExoPlayerVideoView(context);
             videoFrame.addView(videoView);
             videoView.finishInitialization();
@@ -154,15 +156,18 @@ public class ArticleListFragment extends Fragment {
                 ((TextArticleHolder) holder).bind((ArticleItemText)articleItem);
             } else if (articleItem.getArticleType() == ArticleItem.ARTICLE_TYPE.VIDEO) {
 
-                // ((VideoArticleHolder)holder).bind(articleItem);
                 Video video = (Video) articleItem.getContent();
                 VideoArticleHolder vHolder = (VideoArticleHolder) holder;
-                vHolder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
+                // vHolder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
                 BrightcoveVideoView videoView = vHolder.videoView;
                 videoView.clear();
                 videoView.add(video);
+                // Turn off media controller because it's in the way.
+                videoView.setMediaController((BrightcoveMediaController)null);
 
-                // ((VideoArticleHolder) holder).bind((ArticleItemVideo)articleItem);
+                // Auto start the video - but what I really want to do is play/pause depending
+                // on whether the player is in view. 
+                videoView.start();
             }
         }
 
