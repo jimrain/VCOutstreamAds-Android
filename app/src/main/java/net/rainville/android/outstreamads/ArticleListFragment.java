@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.brightcove.player.controller.MediaControlsVisibilityManager;
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
 import com.brightcove.player.event.EventListener;
@@ -81,7 +81,7 @@ public class ArticleListFragment extends Fragment {
 
         public void bind(ArticleItemText textItem) {
             mTexttem = textItem;
-            mTextView.setText((String)mTexttem.getContent());
+            mTextView.setText((Spanned)mTexttem.getContent());
         }
     }
 
