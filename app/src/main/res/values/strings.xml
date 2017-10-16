@@ -4,34 +4,38 @@
     <string name="policy">"BCpkADawqM3dCmAPU7-jl0hHWW8097dehsjhdHYeCZVO3HbClNSwbtBpZkhuDuab141BnGkFL_xvPCif9v6Sz5A27pFUo8-qFuq42J6vzrXnLkmeLzGkQ1HzNdow2rI0qmhyPaEEhSGTPpW9"</string>
     <string name="text_item_1">
         <![CDATA[
-        <b>Outstream Video and the Future of Digital Advertising</b>
-        <br>
-Last updated on August 5, 2017 by Ted Vrountas in Marketing Trends
+        <h1>Outstream Video and the Future of Digital Advertising</h1>
 
+<i>Last updated on August 5, 2017 by Ted Vrountas in Marketing Trends</i>
 
+<p>
 “The new wave of video advertising” is what Teads calls outstream, the game-changing ad format that’s earned overnight notoriety among big-name publishers and well-known marketers.
-
+</p>
+<p>
 If you haven’t heard a lot about it, you’re not alone. Research released last week shows that two-thirds of brand professionals discovered outstream in the last year. In that same year, eMarketer found that 77% of agencies worldwide said the new format is going to be much more important to their clients’ futures.
-
+<br>
 So what’s all the fuss about?
-
+</p>
 What is outstream video?
 You’ve probably seen outstream video before without realizing what you were looking at. The best description of the new ad units comes from the AppNexus team:
-
+<p>
 An ‘outstream’ video ad unit, also commonly referred to as ‘in-read’ or ‘native video’, is a new video advertising unit that autoplays in a large format player whenever a user navigates to it within text content (typically an article), even if the publisher doesn’t have their own video content. It’s called outstream because the video ad exists outside of online video content – also known as instream video content — where the ad plays either before (pre-roll), during (mid-roll), or after (post-roll) the publisher’s video content.
-
-AppNexus
+</p>
+<p>
 Here’s an example from In-View of what an outstream video ad looks like. Notice how the ad opens once a viewer scrolls down the page and then pauses once the player is almost out of view:
+</p>
 ]]>
     </string>
     <string name="text_item_2">
         <![CDATA[
+ <p>
  The rest of the definition varies depending on who you ask. Google says an outstream ad is “typically without sound. Interstitials, Native, and In-Feed are types of outstream video. The okay autoplay silent video on Facebook is a good example of outstream.”
 
 But Mark Book, VP of Digitas Studios, disagrees.“What I do not consider to be outstream are placements within a feed – so Facebook, Instagram and BuzzFeed,” he said. “I would consider this to be pure native in-feed advertising.”
 
 As such a new format, it’s not surprising there’s no universally accepted definition of it yet. What early adopters can agree on, however, is that outstream video is poised for major growth.
-
+</p>
+<p>
 Why outstream video? Why now?
 The “play” button has been called the most compelling call-to-action on the web. By 2019, online videos are expected to generate 15.4 billion in spend, and hog 80 percent of all internet traffic. The reason, Eric Wheeler says in a blog post for ClickZ, is video’s ability to “cut through the clutter and engage target audiences.”
 
@@ -47,7 +51,7 @@ If ads are not integrated well it can lead to ad blindness, or worse annoyance, 
 
 Paul Muret
 The less-intrusive nature of these ads (you can scroll by them if you want), along with their expanded reach, makes them “far more valuable,” says Bertrand Quesada, CEO of outstream ad marketplace, Teads. “This is going to be as big as pre-roll advertising,” he added.
-
+</p>
 ]]>
     </string>
     <string name="videoId">5269117590001</string>
