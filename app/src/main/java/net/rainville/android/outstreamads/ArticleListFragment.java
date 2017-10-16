@@ -166,7 +166,7 @@ public class ArticleListFragment extends Fragment {
                 videoView.setMediaController((BrightcoveMediaController)null);
 
                 // Auto start the video - but what I really want to do is play/pause depending
-                // on whether the player is in view. 
+                // on whether the player is in view.
                 videoView.start();
             }
         }
