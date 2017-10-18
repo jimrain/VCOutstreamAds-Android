@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.brightcove.player.event.Event;
 import com.brightcove.player.event.EventEmitter;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 
 public class ArticleListFragment extends Fragment {
-
+    private static final String TAG = "OutStream";
     private RecyclerView mArticleRecyclerView;
     private ArticleAdapter mAdapter;
 
@@ -138,6 +139,7 @@ public class ArticleListFragment extends Fragment {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Log.i(TAG, "onCreateViewHolder");
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             if (viewType == ARTICLE_ITEM_TEXT) {
                 return new TextArticleHolder(layoutInflater, parent);
@@ -150,6 +152,7 @@ public class ArticleListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            Log.i(TAG, "onBindViewHolder");
             ArticleItem articleItem = mArticleItems.get(position);
 
             if (articleItem.getArticleType() == ArticleItem.ARTICLE_TYPE.TEXT) {
@@ -173,11 +176,13 @@ public class ArticleListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            // Log.i(TAG, "getItemCount");
             return mArticleItems.size();
         }
 
         @Override
         public int getItemViewType(int position) {
+            // Log.i(TAG, "getItemViewType");
             ArticleItem.ARTICLE_TYPE aType = mArticleItems.get(position).getArticleType();
 
             if (aType == ArticleItem.ARTICLE_TYPE.VIDEO) {
@@ -185,6 +190,49 @@ public class ArticleListFragment extends Fragment {
             } else {
                 return ARTICLE_ITEM_TEXT;
             }
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+            Log.i(TAG, "onAttachedToRecyclerView");
+        }
+
+        @Override
+        public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+            int articleType = holder.getItemViewType();
+            Log.i(TAG, "onViewAttachedToWindow " + articleType);
+            super.onViewAttachedToWindow(holder);
+            if (articleType == ARTICLE_ITEM_VIDEO){
+                ((VideoArticleHolder)holder).videoView.start();
+            }
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+            int articleType = holder.getItemViewType();
+            Log.i(TAG, "onViewDetachedFromWindow " + articleType);
+            super.onViewDetachedFromWindow(holder);
+            if (articleType == ARTICLE_ITEM_VIDEO){
+                ((VideoArticleHolder)holder).videoView.stopPlayback();
+            }
+        }
+
+        @Override
+        public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+            Log.i(TAG, "onDetachedFromRecyclerView");
+            super.onDetachedFromRecyclerView(recyclerView);
+
+            /*
+            int childCount = recyclerView.getChildCount();
+            //We need to stop the player to avoid a potential memory leak.
+            for (int i = 0; i < childCount; i++) {
+                RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+                if (holder != null && holder.videoView != null) {
+                    holder.videoView.stopPlayback();
+                }
+            }
+            */
         }
     }
 
