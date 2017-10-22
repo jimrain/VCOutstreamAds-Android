@@ -20,9 +20,14 @@ android {
 }
 
 repositories {
+    jcenter()
     maven {
-        url 'http://repo.brightcove.com/releases'
+        url "https://maven.google.com"
     }
+    maven {
+        url "http://repo.brightcove.com/releases"
+    }
+    mavenLocal()
 }
 
 dependencies {
@@ -36,6 +41,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile "com.brightcove.player:exoplayer:${brightcoveAndroidSdkVersion}"
     compile "com.brightcove.player:android-ima-plugin:${brightcoveAndroidSdkVersion}"
-    compile 'com.google.ads.interactivemedia.v3:interactivemedia:'+imaAndroidSdkVersion
+    compile "com.google.ads.interactivemedia.v3:interactivemedia:${imaAndroidSdkVersion}"
     compile 'com.google.android.gms:play-services-ads:8.1.0'
 }

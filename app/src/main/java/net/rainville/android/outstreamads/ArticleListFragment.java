@@ -163,6 +163,8 @@ public class ArticleListFragment extends Fragment {
                 VideoArticleHolder vHolder = (VideoArticleHolder) holder;
                 // vHolder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
                 BrightcoveVideoView videoView = vHolder.videoView;
+
+                ((ArticleItemVideo)articleItem).setBrightcoveVideoView(videoView);
                 videoView.clear();
                 videoView.add(video);
                 // Turn off media controller because it's in the way.
