@@ -80,6 +80,14 @@ public class ArticleItemVideo extends BrightcovePlayer implements ArticleItem {
         return mType;
     }
 
+    public void pauseAd() {
+        googleIMAComponent.getVideoAdPlayer().pauseAd();
+    }
+
+    public void resumeAd() {
+        googleIMAComponent.getVideoAdPlayer().resumeAd();
+    }
+
     public void setBrightcoveVideoView(BrightcoveVideoView brightcoveVideoView) {
         mBrightcoveVideoView = brightcoveVideoView;
         viewEventEmitter = brightcoveVideoView.getEventEmitter();
