@@ -93,6 +93,8 @@ public class ArticleListFragment extends Fragment {
         public final FrameLayout videoFrame;
         public final BrightcoveVideoView videoView;
 
+        public ArticleItemVideo mVideoItem;
+
         public VideoArticleHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater, parent, R.layout.article_item_video);
             context = itemView.getContext();
@@ -121,7 +123,7 @@ public class ArticleListFragment extends Fragment {
         }
         */
         public void bind(ArticleItemVideo videoItem) {
-            // mVideoItem = videoItem;
+            mVideoItem = videoItem;
             // mTextView.setText((String)mVideoItem.getContent());
         }
 
@@ -163,12 +165,20 @@ public class ArticleListFragment extends Fragment {
                 VideoArticleHolder vHolder = (VideoArticleHolder) holder;
                 // vHolder.videoTitleText.setText(video.getStringProperty(Video.Fields.NAME));
                 BrightcoveVideoView videoView = vHolder.videoView;
+                ArticleItemVideo articleItemVideo = (ArticleItemVideo)articleItem;
 
-                ((ArticleItemVideo)articleItem).setBrightcoveVideoView(videoView);
+                // Add the video view to the article item.
+                articleItemVideo.setBrightcoveVideoView(videoView);
+
+                // Bind the article item to the holder.
+                ((VideoArticleHolder) holder).bind(articleItemVideo);
+
                 videoView.clear();
                 videoView.add(video);
                 // Turn off media controller because it's in the way.
                 videoView.setMediaController((BrightcoveMediaController)null);
+                // videoView.getMediaController().hide();
+
 
                 // Auto start the video - but what I really want to do is play/pause depending
                 // on whether the player is in view.
@@ -206,7 +216,9 @@ public class ArticleListFragment extends Fragment {
             Log.i(TAG, "onViewAttachedToWindow " + articleType);
             super.onViewAttachedToWindow(holder);
             if (articleType == ARTICLE_ITEM_VIDEO){
-                ((VideoArticleHolder)holder).videoView.start();
+                VideoArticleHolder videoArticleHolder = (VideoArticleHolder)holder;
+                videoArticleHolder.videoView.start();
+                videoArticleHolder.mVideoItem.resumeAd();
             }
         }
 
@@ -216,7 +228,9 @@ public class ArticleListFragment extends Fragment {
             Log.i(TAG, "onViewDetachedFromWindow " + articleType);
             super.onViewDetachedFromWindow(holder);
             if (articleType == ARTICLE_ITEM_VIDEO){
-                ((VideoArticleHolder)holder).videoView.stopPlayback();
+                VideoArticleHolder videoArticleHolder = (VideoArticleHolder)holder;
+                videoArticleHolder.videoView.stopPlayback();
+                videoArticleHolder.mVideoItem.pauseAd();
             }
         }
 
