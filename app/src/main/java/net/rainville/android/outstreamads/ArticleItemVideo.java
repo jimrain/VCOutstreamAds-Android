@@ -1,5 +1,6 @@
 package net.rainville.android.outstreamads;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.brightcove.ima.GoogleIMAComponent;
 import com.brightcove.ima.GoogleIMAEventType;
+import com.brightcove.ima.GoogleIMAVideoAdPlayer;
 import com.brightcove.player.edge.Catalog;
 import com.brightcove.player.edge.VideoListener;
 import com.brightcove.player.event.Event;
@@ -44,6 +46,8 @@ public class ArticleItemVideo extends BrightcovePlayer implements ArticleItem {
     private EventEmitter viewEventEmitter;
     private GoogleIMAComponent googleIMAComponent;
     private String adRulesURL = "http://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=%2F15018773%2Feverything2&ciu_szs=300x250%2C468x60%2C728x90&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=dummy&correlator=[timestamp]&cmsid=133&vid=10XWSh7W4so&ad_rule=1";
+
+    private MediaPlayer adsPlayer = null;
 
     public ArticleItemVideo(String VideoID, String AccountID, String PolicyKey) {
         mType = ARTICLE_TYPE.VIDEO;
@@ -188,6 +192,36 @@ public class ArticleItemVideo extends BrightcovePlayer implements ArticleItem {
         // Create the Brightcove IMA Plugin and register the event emitter so that the plugin
         // can deal with video events.
         googleIMAComponent = new GoogleIMAComponent(mBrightcoveVideoView, viewEventEmitter);
+
+        // All of the following is so that I can mute the sound of the ads. Google does not
+        // officially support this so this is a hackaround. 
+        final GoogleIMAVideoAdPlayer googleIMAVideoAdPlayer = googleIMAComponent.getVideoAdPlayer();
+
+        googleIMAVideoAdPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                googleIMAVideoAdPlayer.onPrepared(mp);//DON'T FORGET to call this
+                adsPlayer = mp;
+                adsPlayer.setVolume(0, 0);
+            }
+        });
+
+        googleIMAVideoAdPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                googleIMAVideoAdPlayer.onCompletion(mp);//DON'T FORGET to call this
+                adsPlayer = null;
+            }
+        });
+
+        googleIMAVideoAdPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                googleIMAVideoAdPlayer.onError(mp, what, extra);//DON'T FORGET to call this
+                adsPlayer = null;
+                return false;
+            }
+        });
     }
 
 

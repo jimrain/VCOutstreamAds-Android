@@ -22,7 +22,9 @@ import com.brightcove.player.model.Video;
 import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
 import com.brightcove.player.view.BrightcoveVideoView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jim on 10/9/17.
@@ -111,6 +113,11 @@ public class ArticleListFragment extends Fragment {
                     //You can set listeners on each Video View
                 }
             });
+
+            // Mute the player by setting the volume to 0
+            Map<String, Object> properties = new HashMap<>();
+            properties.put(Event.VOLUME, 0);
+            eventEmitter.emit(EventType.SET_VOLUME, properties);
         }
 
         // private TextView mTextView;
